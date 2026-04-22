@@ -1,0 +1,75 @@
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \c root@localhost
+Creating a session to 'root@localhost'
+Please provide the password for 'root@localhost': **********
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 22 (X protocol)
+Server version: 8.0.44 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:33060+ ssl  SQL > create DATABASE school_db
+                                 -> create TABLE students(id int,name VARCHAR(50),age int);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create TABLE students(id int,name VARCHAR(50),age int)' at line 2
+ MySQL  localhost:33060+ ssl  SQL > create database school_db;
+Query OK, 1 row affected (0.0853 sec)
+ MySQL  localhost:33060+ ssl  SQL > create table students(id int,name varchar(50),age int);
+ERROR: 1046: No database selected
+ MySQL  localhost:33060+ ssl  SQL > use school_db;
+Default schema set to `school_db`.
+Fetching global names, object names from `school_db` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  school_db  SQL > create table students(id int,name varchar(50),age int);
+Query OK, 0 rows affected (0.1563 sec)
+ MySQL  localhost:33060+ ssl  school_db  SQL > create database company_db;
+Query OK, 1 row affected (0.0251 sec)
+ MySQL  localhost:33060+ ssl  school_db  SQL > use company_db;
+Default schema set to `company_db`.
+Fetching global names, object names from `company_db` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table employees(emp_id int,emp_name varchar(100),salary decimal(10,2),department varchar(50));
+Query OK, 0 rows affected (0.0938 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table products(product_id int, produt_name varchar(100),price float);
+Query OK, 0 rows affected (0.1187 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > create database library_db;
+Query OK, 1 row affected (0.0248 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > use library_db;
+Default schema set to `library_db`.
+Fetching global names, object names from `library_db` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  library_db  SQL > create table Books(Book_id int, title varchar(150),price decimal(8,2));
+Query OK, 0 rows affected (0.0967 sec)
+ MySQL  localhost:33060+ ssl  library_db  SQL > use company_db;
+Default schema set to `company_db`.
+Fetching global names, object names from `company_db` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  company_db  SQL > show tables;
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
+| products             |
++----------------------+
+2 rows in set (0.0027 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table orders(order_id int,customer_name varchar(100),order_date date,amount decimal(10,2));
+Query OK, 0 rows affected (0.0914 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > show tables;
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
+| orders               |
+| products             |
++----------------------+
+3 rows in set (0.0028 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > create database college_db;
+Query OK, 1 row affected (0.0224 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table courses(course_id int,course_name varchar(100),duration int);
+Query OK, 0 rows affected (0.0804 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > show tables;
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| courses              |
+| employees            |
+| orders               |
+| products             |
++----------------------+
+4 rows in set (0.0030 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL >
