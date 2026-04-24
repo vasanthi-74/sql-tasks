@@ -1,0 +1,180 @@
+
+
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table products(product_id int, product_name varchar(50), price decimal (10,2), discount decimal(5,2),
+                                             -> stock_quantity int);
+Query OK, 0 rows affected (0.1410 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc products;
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| product_id     | int           | YES  |     | NULL    |       |
+| product_name   | varchar(50)   | YES  |     | NULL    |       |
+| price          | decimal(10,2) | YES  |     | NULL    |       |
+| discount       | decimal(5,2)  | YES  |     | NULL    |       |
+| stock_quantity | int           | YES  |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+5 rows in set (0.0787 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > drop table employees;
+Query OK, 0 rows affected (0.1033 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table employees(emp_id int, name varchar(50), monthly_salary decimal(10,2), bonous_percent decimal(10,2));
+Query OK, 0 rows affected (0.0952 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc employees;
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| emp_id         | int           | YES  |     | NULL    |       |
+| name           | varchar(50)   | YES  |     | NULL    |       |
+| monthly_salary | decimal(10,2) | YES  |     | NULL    |       |
+| bonous_percent | decimal(10,2) | YES  |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0093 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > insert into products values(1, 'Sunscreen', 4000, 10.00, 50),
+                                             -> (2,'Moistorizer', 2500, 15.00, 45),
+                                             -> (3, 'Scerum', 300, 20.00, 100),
+                                             -> (4, 'Cleanser', 200, 12.00, 389),
+                                             -> (5, 'Lip Balm', 500, 10.00, 567);
+Query OK, 5 rows affected (0.0311 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products;
++------------+--------------+---------+----------+----------------+
+| product_id | product_name | price   | discount | stock_quantity |
++------------+--------------+---------+----------+----------------+
+|          1 | Sunscreen    | 4000.00 |    10.00 |             50 |
+|          2 | Moistorizer  | 2500.00 |    15.00 |             45 |
+|          3 | Scerum       |  300.00 |    20.00 |            100 |
+|          4 | Cleanser     |  200.00 |    12.00 |            389 |
+|          5 | Lip Balm     |  500.00 |    10.00 |            567 |
++------------+--------------+---------+----------+----------------+
+5 rows in set (0.0012 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > insert into employees values(1,'Vasanthi', 600000, 25.00
+                                             -> ), (2, 'Pranathi', 500000, 15.00),
+                                             -> (3, 'Ramya', 450000, 14.00),
+                                             -> (4, 'Ramu', 40000, 15.00),
+                                             -> (5, 'Krish', 500000, 20.00);
+Query OK, 5 rows affected (0.0234 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from employees;
++--------+----------+----------------+----------------+
+| emp_id | name     | monthly_salary | bonous_percent |
++--------+----------+----------------+----------------+
+|      1 | Vasanthi |      600000.00 |          25.00 |
+|      2 | Pranathi |      500000.00 |          15.00 |
+|      3 | Ramya    |      450000.00 |          14.00 |
+|      4 | Ramu     |       40000.00 |          15.00 |
+|      5 | Krish    |      500000.00 |          20.00 |
++--------+----------+----------------+----------------+
+5 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select product_id, product_name, price * stock_quantity as total_value from products;
++------------+--------------+-------------+
+| product_id | product_name | total_value |
++------------+--------------+-------------+
+|          1 | Sunscreen    |   200000.00 |
+|          2 | Moistorizer  |   112500.00 |
+|          3 | Scerum       |    30000.00 |
+|          4 | Cleanser     |    77800.00 |
+|          5 | Lip Balm     |   283500.00 |
++------------+--------------+-------------+
+5 rows in set (0.0014 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select product_name, price - 5 as discount_price from products;
++--------------+----------------+
+| product_name | discount_price |
++--------------+----------------+
+| Sunscreen    |        3995.00 |
+| Moistorizer  |        2495.00 |
+| Scerum       |         295.00 |
+| Cleanser     |         195.00 |
+| Lip Balm     |         495.00 |
++--------------+----------------+
+5 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select product_id, product_name, price * 1.10 as new_price from products;
++------------+--------------+-----------+
+| product_id | product_name | new_price |
++------------+--------------+-----------+
+|          1 | Sunscreen    | 4400.0000 |
+|          2 | Moistorizer  | 2750.0000 |
+|          3 | Scerum       |  330.0000 |
+|          4 | Cleanser     |  220.0000 |
+|          5 | Lip Balm     |  550.0000 |
++------------+--------------+-----------+
+5 rows in set (0.0011 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select emp_id, name, monthly_salary * 12 as annual_salary from employees;
++--------+----------+---------------+
+| emp_id | name     | annual_salary |
++--------+----------+---------------+
+|      1 | Vasanthi |    7200000.00 |
+|      2 | Pranathi |    6000000.00 |
+|      3 | Ramya    |    5400000.00 |
+|      4 | Ramu     |     480000.00 |
+|      5 | Krish    |    6000000.00 |
++--------+----------+---------------+
+5 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select emp_id, name, monthly_salary * (bonous_percent / 100) as bonous_amount from employees;
++--------+----------+-----------------+
+| emp_id | name     | bonous_amount   |
++--------+----------+-----------------+
+|      1 | Vasanthi | 150000.00000000 |
+|      2 | Pranathi |  75000.00000000 |
+|      3 | Ramya    |  63000.00000000 |
+|      4 | Ramu     |   6000.00000000 |
+|      5 | Krish    | 100000.00000000 |
++--------+----------+-----------------+
+5 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select product_id, product_name, product_id % 2 as remainder from products;
++------------+--------------+-----------+
+| product_id | product_name | remainder |
++------------+--------------+-----------+
+|          1 | Sunscreen    |         1 |
+|          2 | Moistorizer  |         0 |
+|          3 | Scerum       |         1 |
+|          4 | Cleanser     |         0 |
+|          5 | Lip Balm     |         1 |
++------------+--------------+-----------+
+5 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select product_id, product_name, stock_quantity / 4 as stockper_warehouse from products;
++------------+--------------+--------------------+
+| product_id | product_name | stockper_warehouse |
++------------+--------------+--------------------+
+|          1 | Sunscreen    |            12.5000 |
+|          2 | Moistorizer  |            11.2500 |
+|          3 | Scerum       |            25.0000 |
+|          4 | Cleanser     |            97.2500 |
+|          5 | Lip Balm     |           141.7500 |
++------------+--------------+--------------------+
+5 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select product_id, product_name, price - 2 as profitper_unit from products;
++------------+--------------+----------------+
+| product_id | product_name | profitper_unit |
++------------+--------------+----------------+
+|          1 | Sunscreen    |        3998.00 |
+|          2 | Moistorizer  |        2498.00 |
+|          3 | Scerum       |         298.00 |
+|          4 | Cleanser     |         198.00 |
+|          5 | Lip Balm     |         498.00 |
++------------+--------------+----------------+
+5 rows in set (0.0012 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select emp_id, name, monthly_salary + 200 as total_compensation_travelallowance from employees;
++--------+----------+------------------------------------+
+| emp_id | name     | total_compensation_travelallowance |
++--------+----------+------------------------------------+
+|      1 | Vasanthi |                          600200.00 |
+|      2 | Pranathi |                          500200.00 |
+|      3 | Ramya    |                          450200.00 |
+|      4 | Ramu     |                           40200.00 |
+|      5 | Krish    |                          500200.00 |
++--------+----------+------------------------------------+
+5 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select product_id, product_name, (price * 50) - 100 as Bulk_order_discount from products;
++------------+--------------+---------------------+
+| product_id | product_name | Bulk_order_discount |
++------------+--------------+---------------------+
+|          1 | Sunscreen    |           199900.00 |
+|          2 | Moistorizer  |           124900.00 |
+|          3 | Scerum       |            14900.00 |
+|          4 | Cleanser     |             9900.00 |
+|          5 | Lip Balm     |            24900.00 |
++------------+--------------+---------------------+
+5 rows in set (0.0010 sec)
