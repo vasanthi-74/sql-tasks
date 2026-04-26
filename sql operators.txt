@@ -1,0 +1,215 @@
+MySQL  localhost:33060+ ssl  company_db  SQL > select * from products;
++------------+--------------+---------+----------+----------------+
+| product_id | product_name | price   | discount | stock_quantity |
++------------+--------------+---------+----------+----------------+
+|          1 | Sunscreen    | 4000.00 |    10.00 |             50 |
+|          2 | Moistorizer  | 2500.00 |    15.00 |             45 |
+|          3 | Scerum       |  300.00 |    20.00 |            100 |
+|          4 | Cleanser     |  200.00 |    12.00 |            389 |
+|          5 | Lip Balm     |  500.00 |    10.00 |            567 |
++------------+--------------+---------+----------+----------------+
+5 rows in set (0.0016 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products where price = 500;
++------------+--------------+--------+----------+----------------+
+| product_id | product_name | price  | discount | stock_quantity |
++------------+--------------+--------+----------+----------------+
+|          5 | Lip Balm     | 500.00 |    10.00 |            567 |
++------------+--------------+--------+----------+----------------+
+1 row in set (0.0015 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products where stock_quantity < 10;
+Empty set (0.0015 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products where price > 1000;
++------------+--------------+---------+----------+----------------+
+| product_id | product_name | price   | discount | stock_quantity |
++------------+--------------+---------+----------+----------------+
+|          1 | Sunscreen    | 4000.00 |    10.00 |             50 |
+|          2 | Moistorizer  | 2500.00 |    15.00 |             45 |
++------------+--------------+---------+----------+----------------+
+2 rows in set (0.0011 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products where price <= 250;
++------------+--------------+--------+----------+----------------+
+| product_id | product_name | price  | discount | stock_quantity |
++------------+--------------+--------+----------+----------------+
+|          4 | Cleanser     | 200.00 |    12.00 |            389 |
++------------+--------------+--------+----------+----------------+
+1 row in set (0.0011 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products where stock_quantity >= 50;
++------------+--------------+---------+----------+----------------+
+| product_id | product_name | price   | discount | stock_quantity |
++------------+--------------+---------+----------+----------------+
+|          1 | Sunscreen    | 4000.00 |    10.00 |             50 |
+|          3 | Scerum       |  300.00 |    20.00 |            100 |
+|          4 | Cleanser     |  200.00 |    12.00 |            389 |
+|          5 | Lip Balm     |  500.00 |    10.00 |            567 |
++------------+--------------+---------+----------+----------------+
+4 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products where product_name != pen;
+ERROR: 1054: Unknown column 'pen' in 'where clause'
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products where product_name != 'pen';
++------------+--------------+---------+----------+----------------+
+| product_id | product_name | price   | discount | stock_quantity |
++------------+--------------+---------+----------+----------------+
+|          1 | Sunscreen    | 4000.00 |    10.00 |             50 |
+|          2 | Moistorizer  | 2500.00 |    15.00 |             45 |
+|          3 | Scerum       |  300.00 |    20.00 |            100 |
+|          4 | Cleanser     |  200.00 |    12.00 |            389 |
+|          5 | Lip Balm     |  500.00 |    10.00 |            567 |
++------------+--------------+---------+----------+----------------+
+5 rows in set (0.0017 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from employees;
++--------+----------+----------------+----------------+
+| emp_id | name     | monthly_salary | bonous_percent |
++--------+----------+----------------+----------------+
+|      1 | Vasanthi |      600000.00 |          25.00 |
+|      2 | Pranathi |      500000.00 |          15.00 |
+|      3 | Ramya    |      450000.00 |          14.00 |
+|      4 | Ramu     |       40000.00 |          15.00 |
+|      5 | Krish    |      500000.00 |          20.00 |
++--------+----------+----------------+----------------+
+5 rows in set (0.0014 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| company_db         |
+| employees_db       |
+| hoapital_db        |
+| hospital_db        |
+| information_schema |
+| library_db         |
+| mysql              |
+| performance_schema |
+| sakila             |
+| school_db          |
+| sys                |
+| world              |
++--------------------+
+13 rows in set (0.0276 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > use sys;
+Default schema set to `sys`.
+Fetching global names, object names from `sys` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  sys  SQL > create table employees(name varchar(20), salary decimal(10,2), department varchar(50), city char(20));
+Query OK, 0 rows affected (0.1167 sec)
+ MySQL  localhost:33060+ ssl  sys  SQL > select * from employees;
+Empty set (0.0143 sec)
+ MySQL  localhost:33060+ ssl  sys  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| name       | varchar(20)   | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
+| city       | char(20)      | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0034 sec)
+ MySQL  localhost:33060+ ssl  sys  SQL > insert into  employees values
+                                      -> ('charan', 50000, 'IT', 'Hyderabad'),
+                                      -> ('Bhanu', 45000,'Marketing', 'Chennai'),
+                                      -> ('Shubash', 60000,'Sales', 'Banglore'),
+                                      -> ('Venkat', 45000, 'Finance', 'Luknow');
+Query OK, 4 rows affected (0.0196 sec)
+
+Records: 4  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  sys  SQL > select * from employees;
++---------+----------+------------+-----------+
+| name    | salary   | department | city      |
++---------+----------+------------+-----------+
+| charan  | 50000.00 | IT         | Hyderabad |
+| Bhanu   | 45000.00 | Marketing  | Chennai   |
+| Shubash | 60000.00 | Sales      | Banglore  |
+| Venkat  | 45000.00 | Finance    | Luknow    |
++---------+----------+------------+-----------+
+4 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  sys  SQL > select * from employees where department = Sales and salary > 40000;
+ERROR: 1054: Unknown column 'Sales' in 'where clause'
+ MySQL  localhost:33060+ ssl  sys  SQL > select * from employees where department =' Sales' and salary > 40000;
+Empty set (0.0014 sec)
+ MySQL  localhost:33060+ ssl  sys  SQL > select * from employees where city ='Hyderabad' or salary > 60000;
++--------+----------+------------+-----------+
+| name   | salary   | department | city      |
++--------+----------+------------+-----------+
+| charan | 50000.00 | IT         | Hyderabad |
++--------+----------+------------+-----------+
+1 row in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  sys  SQL > select * from  employees where department != 'Finance';
++---------+----------+------------+-----------+
+| name    | salary   | department | city      |
++---------+----------+------------+-----------+
+| charan  | 50000.00 | IT         | Hyderabad |
+| Bhanu   | 45000.00 | Marketing  | Chennai   |
+| Shubash | 60000.00 | Sales      | Banglore  |
++---------+----------+------------+-----------+
+3 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > create table students(name varchar(30), city varchar(50), marks int, email varchar(50));
+Query OK, 0 rows affected (0.1779 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(30) | YES  |     | NULL    |       |
+| city  | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| email | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > INSERT INTO students (name, city, marks, email) VALUES ('Amit', 'Mumbai', 85, 'amit@gmail.com'),
+('Priya', 'Pune', 78, 'priya@gmail.com'), ('Rahul', 'Kolkata', 92, 'rahul@gmail.com'), ('Sneha', 'Delhi', 88, 'sneha@gmail.com'), 
+('Kiran', 'Chennai', 74, NULL), ('Anjali', 'Hyderabad', 81, 'anjali@gmail.com'), ('Vikram', 'Mumbai', 69, NULL), 
+('Pooja', 'Pune', 95, 'pooja@gmail.com'), ('Krishna', 'Delhi', 55, NULL), ('Meena', 'kolkata', 90, 'meena@gmail.com');
+Query OK, 10 rows affected (0.0290 sec)
+
+Records: 10  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  college_db  SQL > select * from students;
++---------+-----------+-------+------------------+
+| name    | city      | marks | email            |
++---------+-----------+-------+------------------+
+| Amit    | Mumbai    |    85 | amit@gmail.com   |
+| Priya   | Pune      |    78 | priya@gmail.com  |
+| Rahul   | Kolkata   |    92 | rahul@gmail.com  |
+| Sneha   | Delhi     |    88 | sneha@gmail.com  |
+| Kiran   | Chennai   |    74 | NULL             |
+| Anjali  | Hyderabad |    81 | anjali@gmail.com |
+| Vikram  | Mumbai    |    69 | NULL             |
+| Pooja   | Pune      |    95 | pooja@gmail.com  |
+| Krishna | Delhi     |    55 | NULL             |
+| Meena   | kolkata   |    90 | meena@gmail.com  |
++---------+-----------+-------+------------------+
+10 rows in set (0.0011 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > select * from students where city in ('Mumbai', 'Pune', 'Kolkat');
++--------+--------+-------+-----------------+
+| name   | city   | marks | email           |
++--------+--------+-------+-----------------+
+| Amit   | Mumbai |    85 | amit@gmail.com  |
+| Priya  | Pune   |    78 | priya@gmail.com |
+| Vikram | Mumbai |    69 | NULL            |
+| Pooja  | Pune   |    95 | pooja@gmail.com |
++--------+--------+-------+-----------------+
+4 rows in set (0.0012 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > select * from students where city not in ('Delhi', 'Chennai');
++--------+-----------+-------+------------------+
+| name   | city      | marks | email            |
++--------+-----------+-------+------------------+
+| Amit   | Mumbai    |    85 | amit@gmail.com   |
+| Priya  | Pune      |    78 | priya@gmail.com  |
+| Rahul  | Kolkata   |    92 | rahul@gmail.com  |
+| Anjali | Hyderabad |    81 | anjali@gmail.com |
+| Vikram | Mumbai    |    69 | NULL             |
+| Pooja  | Pune      |    95 | pooja@gmail.com  |
+| Meena  | kolkata   |    90 | meena@gmail.com  |
++--------+-----------+-------+------------------+
+7 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > select * from students where email is not null;
++--------+-----------+-------+------------------+
+| name   | city      | marks | email            |
++--------+-----------+-------+------------------+
+| Amit   | Mumbai    |    85 | amit@gmail.com   |
+| Priya  | Pune      |    78 | priya@gmail.com  |
+| Rahul  | Kolkata   |    92 | rahul@gmail.com  |
+| Sneha  | Delhi     |    88 | sneha@gmail.com  |
+| Anjali | Hyderabad |    81 | anjali@gmail.com |
+| Pooja  | Pune      |    95 | pooja@gmail.com  |
+| Meena  | kolkata   |    90 | meena@gmail.com  |
++--------+-----------+-------+------------------+
+7 rows in set (0.0009 sec)
+
