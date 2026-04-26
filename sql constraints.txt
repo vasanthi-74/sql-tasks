@@ -1,0 +1,101 @@
+ MySQL  localhost:33060+ ssl  college_db  SQL > create table user(id int primary key, phone int unique);
+Query OK, 0 rows affected (0.1560 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > desc user;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| id    | int  | NO   | PRI | NULL    |       |
+| phone | int  | YES  | UNI | NULL    |       |
++-------+------+------+-----+---------+-------+
+2 rows in set (0.0028 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > create table student(name varchar(30) not null, roll_no int unique);
+Query OK, 0 rows affected (0.1644 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(30) | NO   |     | NULL    |       |
+| roll_no | int         | YES  | UNI | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.0093 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > drop table student;
+Query OK, 0 rows affected (0.0624 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > create table student(name varchar(30) not null, roll_no int unique, city varchar(50), address varchar(150));
+Query OK, 0 rows affected (0.1243 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > desc student;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| name    | varchar(30)  | NO   |     | NULL    |       |
+| roll_no | int          | YES  | UNI | NULL    |       |
+| city    | varchar(50)  | YES  |     | NULL    |       |
+| address | varchar(150) | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+4 rows in set (0.0045 sec)
+ 
+ MySQL  localhost:33060+ ssl  college_db  SQL > insert into student (name, roll_no, city, address) VALUES ('Amit', 101, 'Mumbai', 'Street 1'), ('Priya', 102, 'Pune', 'Street 2');
+Query OK, 2 rows affected (0.0209 sec)
+
+Records: 2  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  college_db  SQL > select * from student;
++-------+---------+--------+----------+
+| name  | roll_no | city   | address  |
++-------+---------+--------+----------+
+| Amit  |     101 | Mumbai | Street 1 |
+| Priya |     102 | Pune   | Street 2 |
++-------+---------+--------+----------+
+2 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > alter table student modify address varchar(150) not null;
+Query OK, 0 rows affected (0.3701 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  college_db  SQL > select * from student;
++-------+---------+--------+----------+
+| name  | roll_no | city   | address  |
++-------+---------+--------+----------+
+| Amit  |     101 | Mumbai | Street 1 |
+| Priya |     102 | Pune   | Street 2 |
++-------+---------+--------+----------+
+2 rows in set (0.0008 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > create table books(book_id int primary key, book_name varchar(50), price decimal(10,2));
+Query OK, 0 rows affected (0.2097 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > desc student;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| name    | varchar(30)  | NO   |     | NULL    |       |
+| roll_no | int          | YES  | UNI | NULL    |       |
+| city    | varchar(50)  | YES  |     | NULL    |       |
+| address | varchar(150) | NO   |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+4 rows in set (0.0033 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > desc books;
++-----------+---------------+------+-----+---------+-------+
+| Field     | Type          | Null | Key | Default | Extra |
++-----------+---------------+------+-----+---------+-------+
+| book_id   | int           | NO   | PRI | NULL    |       |
+| book_name | varchar(50)   | YES  |     | NULL    |       |
+| price     | decimal(10,2) | YES  |     | NULL    |       |
++-----------+---------------+------+-----+---------+-------+
+3 rows in set (0.0033 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > create table employees(emp_id int primary key,
+                                             -> name varchar(20), age int);
+Query OK, 0 rows affected (0.0849 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > insert into employees values(1, 'Rama', 25),(2, 'Sneha', 30);
+Query OK, 2 rows affected (0.0199 sec)
+
+Records: 2  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  college_db  SQL > select * from employees;
++--------+-------+-----+
+| emp_id | name  | age |
++--------+-------+-----+
+|      1 | Rama  |  25 |
+|      2 | Sneha |  30 |
++--------+-------+-----+
+2 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  college_db  SQL > alter table employees add constraint check_age check(age>=18);
+Query OK, 2 rows affected (0.2512 sec)
+
+Records: 2  Duplicates: 0  Warnings: 0
