@@ -1,0 +1,197 @@
+
+ MySQL  localhost:33060+ ssl  aggregate  SQL > create  database clause;
+Query OK, 1 row affected (0.1114 sec)
+ MySQL  localhost:33060+ ssl  aggregate  SQL > use clause;
+Default schema set to `clause`.
+Fetching global names, object names from `clause` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  clause  SQL > CREATE TABLE employees (
+                                         ->     emp_id INT,
+                                         ->     name VARCHAR(50),
+                                         ->     department VARCHAR(50),
+                                         ->     job_role VARCHAR(50),
+                                         ->     salary INT,
+                                         ->     age INT,
+                                         ->     manager_id INT
+                                         -> );
+Query OK, 0 rows affected (0.1167 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > desc employees;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| emp_id     | int         | YES  |     | NULL    |       |
+| name       | varchar(50) | YES  |     | NULL    |       |
+| department | varchar(50) | YES  |     | NULL    |       |
+| job_role   | varchar(50) | YES  |     | NULL    |       |
+| salary     | int         | YES  |     | NULL    |       |
+| age        | int         | YES  |     | NULL    |       |
+| manager_id | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+7 rows in set (0.0207 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > INSERT INTO employees VALUES
+                                         -> (1, 'Arun', 'IT', 'Developer', 50000, 28, 101),
+                                         -> (2, 'Anitha', 'HR', 'Manager', 45000, 35, NULL),
+                                         -> (3, 'Bala', 'Finance', 'Analyst', 38000, 32, 102),
+                                         -> (4, 'Ajay', 'IT', 'Developer', 42000, 26, 101),
+                                         -> (5, 'Divya', 'HR', 'Executive', 30000, 24, 103),
+                                         -> (6, 'Kiran', 'Finance', 'Manager', 55000, 40, NULL),
+                                         -> (7, 'Asha', 'IT', 'Tester', 35000, 27, 101),
+                                         -> (8, 'Ravi', 'IT', 'Developer', 60000, 30, 101),
+                                         -> (9, 'Sneha', 'HR', 'Executive', 32000, 29, 103),
+                                         -> (10, 'Arvind', 'Finance', 'Analyst', 41000, 31, 102),
+                                         -> (11, 'Meena', 'IT', 'Tester', 29000, 23, 101),
+                                         -> (12, 'Akash', 'IT', 'Developer', 47000, 34, 101),
+                                         -> (13, 'Pooja', 'HR', 'Manager', 52000, 38, NULL),
+                                         -> (14, 'Suresh', 'Finance', 'Clerk', 28000, 25, 102),
+                                         -> (15, 'Amar', 'IT', 'Developer', 39000, 33, 101);
+Query OK, 15 rows affected (0.0499 sec)
+
+Records: 15  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  clause  SQL > select * from employees;
++--------+--------+------------+-----------+--------+-----+------------+
+| emp_id | name   | department | job_role  | salary | age | manager_id |
++--------+--------+------------+-----------+--------+-----+------------+
+|      1 | Arun   | IT         | Developer |  50000 |  28 |        101 |
+|      2 | Anitha | HR         | Manager   |  45000 |  35 |       NULL |
+|      3 | Bala   | Finance    | Analyst   |  38000 |  32 |        102 |
+|      4 | Ajay   | IT         | Developer |  42000 |  26 |        101 |
+|      5 | Divya  | HR         | Executive |  30000 |  24 |        103 |
+|      6 | Kiran  | Finance    | Manager   |  55000 |  40 |       NULL |
+|      7 | Asha   | IT         | Tester    |  35000 |  27 |        101 |
+|      8 | Ravi   | IT         | Developer |  60000 |  30 |        101 |
+|      9 | Sneha  | HR         | Executive |  32000 |  29 |        103 |
+|     10 | Arvind | Finance    | Analyst   |  41000 |  31 |        102 |
+|     11 | Meena  | IT         | Tester    |  29000 |  23 |        101 |
+|     12 | Akash  | IT         | Developer |  47000 |  34 |        101 |
+|     13 | Pooja  | HR         | Manager   |  52000 |  38 |       NULL |
+|     14 | Suresh | Finance    | Clerk     |  28000 |  25 |        102 |
+|     15 | Amar   | IT         | Developer |  39000 |  33 |        101 |
++--------+--------+------------+-----------+--------+-----+------------+
+15 rows in set (0.0087 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select * from employees where salary > 40000;
++--------+--------+------------+-----------+--------+-----+------------+
+| emp_id | name   | department | job_role  | salary | age | manager_id |
++--------+--------+------------+-----------+--------+-----+------------+
+|      1 | Arun   | IT         | Developer |  50000 |  28 |        101 |
+|      2 | Anitha | HR         | Manager   |  45000 |  35 |       NULL |
+|      4 | Ajay   | IT         | Developer |  42000 |  26 |        101 |
+|      6 | Kiran  | Finance    | Manager   |  55000 |  40 |       NULL |
+|      8 | Ravi   | IT         | Developer |  60000 |  30 |        101 |
+|     10 | Arvind | Finance    | Analyst   |  41000 |  31 |        102 |
+|     12 | Akash  | IT         | Developer |  47000 |  34 |        101 |
+|     13 | Pooja  | HR         | Manager   |  52000 |  38 |       NULL |
++--------+--------+------------+-----------+--------+-----+------------+
+8 rows in set (0.0008 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select * from employees where name like 'A%';
++--------+--------+------------+-----------+--------+-----+------------+
+| emp_id | name   | department | job_role  | salary | age | manager_id |
++--------+--------+------------+-----------+--------+-----+------------+
+|      1 | Arun   | IT         | Developer |  50000 |  28 |        101 |
+|      2 | Anitha | HR         | Manager   |  45000 |  35 |       NULL |
+|      4 | Ajay   | IT         | Developer |  42000 |  26 |        101 |
+|      7 | Asha   | IT         | Tester    |  35000 |  27 |        101 |
+|     10 | Arvind | Finance    | Analyst   |  41000 |  31 |        102 |
+|     12 | Akash  | IT         | Developer |  47000 |  34 |        101 |
+|     15 | Amar   | IT         | Developer |  39000 |  33 |        101 |
++--------+--------+------------+-----------+--------+-----+------------+
+7 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select * from employees where department in ('HR', 'Finance');
++--------+--------+------------+-----------+--------+-----+------------+
+| emp_id | name   | department | job_role  | salary | age | manager_id |
++--------+--------+------------+-----------+--------+-----+------------+
+|      2 | Anitha | HR         | Manager   |  45000 |  35 |       NULL |
+|      3 | Bala   | Finance    | Analyst   |  38000 |  32 |        102 |
+|      5 | Divya  | HR         | Executive |  30000 |  24 |        103 |
+|      6 | Kiran  | Finance    | Manager   |  55000 |  40 |       NULL |
+|      9 | Sneha  | HR         | Executive |  32000 |  29 |        103 |
+|     10 | Arvind | Finance    | Analyst   |  41000 |  31 |        102 |
+|     13 | Pooja  | HR         | Manager   |  52000 |  38 |       NULL |
+|     14 | Suresh | Finance    | Clerk     |  28000 |  25 |        102 |
++--------+--------+------------+-----------+--------+-----+------------+
+8 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select *from  employees where manager_id is null;
++--------+--------+------------+----------+--------+-----+------------+
+| emp_id | name   | department | job_role | salary | age | manager_id |
++--------+--------+------------+----------+--------+-----+------------+
+|      2 | Anitha | HR         | Manager  |  45000 |  35 |       NULL |
+|      6 | Kiran  | Finance    | Manager  |  55000 |  40 |       NULL |
+|     13 | Pooja  | HR         | Manager  |  52000 |  38 |       NULL |
++--------+--------+------------+----------+--------+-----+------------+
+3 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select *from employees where manager_id is null;
++--------+--------+------------+----------+--------+-----+------------+
+| emp_id | name   | department | job_role | salary | age | manager_id |
++--------+--------+------------+----------+--------+-----+------------+
+|      2 | Anitha | HR         | Manager  |  45000 |  35 |       NULL |
+|      6 | Kiran  | Finance    | Manager  |  55000 |  40 |       NULL |
+|     13 | Pooja  | HR         | Manager  |  52000 |  38 |       NULL |
++--------+--------+------------+----------+--------+-----+------------+
+3 rows in set (0.0012 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select department, count(*) as total_employees from employees where salary > 30000 group by department;
++------------+-----------------+
+| department | total_employees |
++------------+-----------------+
+| IT         |               6 |
+| HR         |               3 |
+| Finance    |               3 |
++------------+-----------------+
+3 rows in set (0.0060 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select job_role, avg(salary) as avg_salary from employees where department = 'IT' group by job_role;
++-----------+------------+
+| job_role  | avg_salary |
++-----------+------------+
+| Developer | 47600.0000 |
+| Tester    | 32000.0000 |
++-----------+------------+
+2 rows in set (0.0079 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select department , job_role, sum(salary) as total_salary from employees where age < 35 group by department, job_role;
++------------+-----------+--------------+
+| department | job_role  | total_salary |
++------------+-----------+--------------+
+| IT         | Developer |       238000 |
+| Finance    | Analyst   |        79000 |
+| HR         | Executive |        62000 |
+| IT         | Tester    |        64000 |
+| Finance    | Clerk     |        28000 |
++------------+-----------+--------------+
+5 rows in set (0.0018 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select department, sum(salary) as toatal_salary from employees group by  department;
++------------+---------------+
+| department | toatal_salary |
++------------+---------------+
+| IT         |        302000 |
+| HR         |        159000 |
+| Finance    |        162000 |
++------------+---------------+
+3 rows in set (0.0011 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select department, count(*) as total_employees from employees group by department;
++------------+-----------------+
+| department | total_employees |
++------------+-----------------+
+| IT         |               7 |
+| HR         |               4 |
+| Finance    |               4 |
++------------+-----------------+
+3 rows in set (0.0013 sec)
+ MySQL  localhost:33060+ ssl  clause  SQL > select department, avg(salary) as avg_salary from employees group by department;
++------------+------------+
+| department | avg_salary |
++------------+------------+
+| IT         | 43142.8571 |
+| HR         | 39750.0000 |
+| Finance    | 40500.0000 |
++------------+------------+
+3 rows in set (0.0009 sec)
+
+ MySQL  localhost:33060+ ssl  clause  SQL > select department, job_role, count(*) as total_employees from employees group by department, job_role;
++------------+-----------+-----------------+
+| department | job_role  | total_employees |
++------------+-----------+-----------------+
+| IT         | Developer |               5 |
+| HR         | Manager   |               2 |
+| Finance    | Analyst   |               2 |
+| HR         | Executive |               2 |
+| Finance    | Manager   |               1 |
+| IT         | Tester    |               2 |
+| Finance    | Clerk     |               1 |
++------------+-----------+-----------------+
+7 rows in set (0.0013 sec)
