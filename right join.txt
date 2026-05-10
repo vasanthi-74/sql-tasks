@@ -1,0 +1,196 @@
+RIGHT JOIN
+create database srh;
+use srh;
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    order_amount INT
+);
+
+INSERT INTO orders VALUES
+(101, 5000),
+(102, 7000),
+(103, 3000);
+
+CREATE TABLE payments (
+    payment_id INT PRIMARY KEY,
+    order_id INT,
+    payment_amount INT,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+INSERT INTO payments VALUES
+(1, 101, 5000),
+(2, 102, 7000),
+(3, NULL, 4000);
+
+CREATE TABLE customers (
+    cust_id INT PRIMARY KEY,
+    cust_name VARCHAR(50)
+);
+
+INSERT INTO customers VALUES
+(1, 'Arjun'),
+(2, 'Meena'),
+(3, 'Ravi');
+
+CREATE TABLE transactions_table (
+    trans_id INT PRIMARY KEY,
+    cust_id INT,
+    amount INT,
+    FOREIGN KEY (cust_id) REFERENCES customers(cust_id)
+);
+
+INSERT INTO transactions_table VALUES
+(201, 1, 6000),
+(202, 2, 3000),
+(203, NULL, 4500);
+
+CREATE TABLE invoices (
+    invoice_id INT PRIMARY KEY,
+    order_id INT,
+    invoice_amount INT,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+INSERT INTO invoices VALUES
+(301, 101, 5000),
+(302, NULL, 2500);
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50)
+);
+
+INSERT INTO employees VALUES
+(1, 'Ram'),
+(2, 'Sita');
+
+CREATE TABLE attendance (
+    attendance_id INT PRIMARY KEY,
+    emp_id INT,
+    status VARCHAR(20),
+    FOREIGN KEY (emp_id) REFERENCES employees(emp_id)
+);
+
+INSERT INTO attendance VALUES
+(1, 1, 'Present'),
+(2, NULL, 'Absent');
+
+CREATE TABLE shipments (
+    shipment_id INT PRIMARY KEY,
+    order_id INT,
+    shipment_status VARCHAR(30),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+INSERT INTO shipments VALUES
+(1, 101, 'Shipped'),
+(2, NULL, 'Pending');
+
+CREATE TABLE refunds (
+    refund_id INT PRIMARY KEY,
+    order_id INT,
+    refund_amount INT,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+INSERT INTO refunds VALUES
+(1, 101, 1000),
+(2, NULL, 500);
+
+CREATE TABLE systems (
+    system_id INT PRIMARY KEY,
+    system_name VARCHAR(50)
+);
+
+INSERT INTO systems VALUES
+(1, 'Server A'),
+(2, 'Server B');
+
+CREATE TABLE logs (
+    log_id INT PRIMARY KEY,
+    system_id INT,
+    log_message VARCHAR(100),
+    FOREIGN KEY (system_id) REFERENCES systems(system_id)
+);
+
+INSERT INTO logs VALUES
+(1, 1, 'Login Success'),
+(2, NULL, 'Unknown Access');
+
+CREATE TABLE users (
+    user_id INT PRIMARY KEY,
+    user_name VARCHAR(50)
+);
+
+INSERT INTO users VALUES
+(1, 'Anil'),
+(2, 'Bhavana');
+
+CREATE TABLE bookings (
+    booking_id INT PRIMARY KEY,
+    user_id INT,
+    booking_date DATE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+INSERT INTO bookings VALUES
+(1, 1, '2026-05-07'),
+(2, NULL, '2026-05-08');
+
+CREATE TABLE audit_logs (
+    audit_id INT PRIMARY KEY,
+    system_id INT,
+    activity VARCHAR(100),
+    FOREIGN KEY (system_id) REFERENCES systems(system_id)
+);
+
+INSERT INTO audit_logs VALUES
+(1, 1, 'Data Updated'),
+(2, NULL, 'Unknown Modification');
+
+
+select o.order_id,p.payment_id,p.payment_amount from orders o 
+right join payments p on o.order_id=p.order_id;
+
+select c.cust_name,t.trans_id,t.amount from customers c 
+right join transactions_table t on
+c.cust_id=t.cust_id;
+
+select o.order_id,i.invoice_id,i.invoice_amount from orders o right join invoices i on
+o.order_id=i.order_id;
+
+select e.emp_name,a.attendance_id,a.status from employees e right join attendance a on
+e.emp_id=a.emp_id;
+
+select o.order_id,s.shipment_id,s.shipment_status from orders o right join shipments s on
+o.order_id=s.order_id;
+
+select p.payment_id,p.payment_amount,o.order_id,o.order_amount from orders o right join payments p 
+on o.order_id=p.order_id;
+
+select c.cust_name,t.trans_id,t.amount from customers c right join transactions_table t on
+c.cust_id=t.cust_id;
+
+select r.refund_id,r.refund_amount,o.order_amount from orders o right join refunds r on
+o.order_id=r.order_id;
+
+select l.log_id,l.log_message,s.system_name from systems s right join logs l on
+s.system_id=l.system_id;
+
+select b.booking_id,b.booking_date,u.user_name from users u right join bookings b on
+u.user_id=b.user_id;
+
+select p.payment_id,p.payment_amount,o.order_id,o.order_amount from orders o right join payments p on
+o.order_id=p.order_id where o.order_id is null; 
+
+select t.trans_id,t.amount,c.cust_name from customers c right join transactions_table t on
+c.cust_id=t.cust_id where c.cust_id is null;
+
+select a.audit_id,ifnull(s.system_name,'System Missing') as system_status,a.activity from systems s 
+right join audit_logs a on s.system_id=a.system_id;
+
+select i.invoice_id,ifnull(o.order_id,'No order') as order_status,i.invoice_amount from orders o right join invoices i on
+o.order_id=i.order_id;
+
+select s.shipment_id,o.order_id from orders o right join shipments s on o.order_id=s.order_id;
