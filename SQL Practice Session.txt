@@ -1,0 +1,181 @@
+     SQL Practice Session Assignment
+
+
+1. Define data and explain the different types of data.
+ Data is defined as raw facts, figures, symbols or observations that can be recorded, stored, and processed to create meaningful information.
+
+Types of Data
+1.Quantitative(Numerical)data: Data that can be measured, counted and expressed numerically(Numbers).
+
+2.Qualitative data(Categorical): Data that is not numerical often representing charecteristics or attributes(Text Values).
+
+3.Boolean Data: True/False values
+
+4. Date & Time Data: stores date and time.
+
+5.Binary Data: Images, files,Videos.
+
+2. What is a Database?
+Database is an organised collection of related data stored electronically.
+Data is usually organised in tables with rows and columns(reltional databases).
+
+3. What is DBMS? Explain its Purpose.
+DBMS -Database Management System is used to create, manage and manipulate databases.
+Purpose of DBMS:
+It stores the data safely, retrive the data quickly, reduce the duplicate values and handles the large amount of data,
+maintain security.
+
+4. Explain the types of DBMS.
+Hierarchical DBMS – Data stored in tree structure
+Network DBMS – Data connected in network form
+Relational DBMS (RDBMS) – Data stored in tables
+Object-Oriented DBMS – Stores objects/classes.
+
+5. What is MySQL?
+MySQL is an open-source Relational Database Management System (RDBMS) used to store and manage data usig SQL.
+
+6. What is SQL?
+SQL-Structured Query Language is used to communicate with databases for creating tables,inserting,
+updating, deleting, retrieving data.
+
+7. Why is MySQL Mostly Used?
+MySQL is free & oepn-source,fast performance,easy to learn,secure,it supports large databases,widely used in web applications.
+
+8. What is a Query in SQL?
+A Query is a SQL statement used to perform operations on data.
+
+9. What is a Table in Database?
+A table stores data in rows and columns.
+
+10. What is a Record in a Table?
+A record is a single row in a table.
+
+11. What is a Column in a Table?
+A Column represents a field/attribute in a table.
+
+12. Explain the different types of SQL command languages
+ 1.DDL-Data Definition language
+  Used to define database structure.
+  Create, Alter, Drop, Truncate.
+ 2.DML-Data Manipulate Language 
+   Used to manipulate data.
+   Insert, Update, Delete
+ 3.DQL-Data Query Language
+  Used to retrive data - SELECT
+ 4.TCL- Transaction Control Language
+  Used for transactions. - COMMIT, ROLLBACK, SAVEPOINT
+
+ 13. Create a table with the following structure:
+ • id (INT, PRIMARY KEY, UNIQUE, AUTO_INCREMENT)
+ • sno (AUTO_INCREMENT)
+ • salary (DECIMAL)
+ • address (TEXT)
+ • status (BOOLEAN) 
+• department (VARCHAR)
+
+Query:
+
+CREATE TABLE employees (
+    id int primary key unique,auto_increment,
+    sno int auto_increment,
+    salary decimal(10,2),
+    address text,
+    status boolean,
+    department varchar(50)
+);
+
+14. Insert at least 8 records into the above table.
+INSERT INTO employees (salary, address, status, department)
+VALUES
+(25000, 'Hyderabad', TRUE, 'IT'),
+(18000, 'Chennai', FALSE, 'HR'),
+(32000, 'Bangalore', TRUE, 'IT'),
+(15000, 'Delhi', TRUE, 'Sales'),
+(27000, 'Mumbai', FALSE, 'Finance'),
+(22000, 'Pune', TRUE, 'HR'),
+(40000, 'Kolkata', TRUE, 'IT'),
+(17000, 'Vizag', FALSE, 'Sales');
+
+15. Write a query to salary by adding a bonus of 1000 where salary is greater than 20000.
+update employees set salary = salary + 1000 where salary > 20000;
+
+16. Rename the existing table using. 
+rename employees TO employee_details;
+
+17. Add a new column 'email' using ALTER TABLE. 
+ALTER TABLE employee_details ADD email VARCHAR(100);
+
+
+18. Update email values using CASE statement in a single query. 
+UPDATE employee_details
+SET email =
+CASE
+    WHEN id = 1 THEN 'x@gmail.com'
+    WHEN id = 2 THEN 'y@gmail.com'
+    WHEN id = 3 THEN 'z@gmail.com'
+    WHEN id = 4 THEN 'a@gmail.com'
+    ELSE 'default@gmail.com'
+END;
+
+19. Modify the status column datatype from BOOLEAN to VARCHAR.
+ALTER TABLE employee_details
+MODIFY status VARCHAR(20);
+
+20. Differentiate between ALTER and UPDATE commands.?
+Alter: 
+Changes table structure, Used on columns/tables, DDL command
+
+Update:
+Change table data, Used on rows, DML command
+
+21. Differentiate between DROP and TRUNCATE commands.?
+Drop:
+Delete entire table, Table structure removed, Cannot rollback mostly.
+Truncate:
+Delete only data, Structure remains, faser opeation
+
+
+22. Write a query to delete rows where salary is less than the average salary of its department.? 
+DELETE FROM employee_details
+WHERE salary < (
+    SELECT AVG(salary)
+    FROM employee_details
+);
+
+23. Differentiate between GROUP BY clause and HAVING clause.?
+Group by:
+Groups rows, used with aggregate functions
+Having:
+Filters groped data, Used after group by
+
+
+24. Count employees in each department.?
+SELECT department, COUNT(*) AS total_employees FROM employee_details GROUP BY department;
+
+25. Count employees in a specific department that “It”?
+SELECT COUNT(*) AS total_IT_employees FROM employee_details WHERE department = 'IT';
+
+26. ENUM Data Type Syntax?  
+CREATE TABLE test (gender ENUM('Male', 'Female', 'Other'));
+
+
+27.SET Data Type Syntax?
+CREATE TABLE hobbies (skills SET('Java', 'Python', 'SQL'));
+
+28.write a query to retrieve the second highest salary?
+SELECT MAX(salary) AS second_highest_salary
+FROM employee_details
+WHERE salary < (SELECT MAX(salary) FROM employee_details);
+
+29. FOREIGN KEY Syntax? 
+CREATE TABLE table_name (column1 datatype, column2 datatype,
+    FOREIGN KEY (column_name)
+    REFERENCES parent_table(parent_column));
+
+30. How can I find the data types of all columns in a table in MySQL?
+DESC employee_details;
+SHOW COLUMNS FROM employee_details;
+
+
+
+
